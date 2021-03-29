@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
 
     <data>
@@ -36,7 +37,7 @@
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:text="@{dataItem.amount.toString()}"
+                app:amount="@{dataItem.amount.toString()}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/black" />
 

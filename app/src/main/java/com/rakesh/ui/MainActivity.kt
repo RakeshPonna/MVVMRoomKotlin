@@ -1,6 +1,7 @@
 package com.rakesh.ui
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -61,10 +62,16 @@ class MainActivity : DaggerAppCompatActivity() {
         val binding: DilaogExpenseEntryBinding = DataBindingUtil
             .inflate(LayoutInflater.from(this), R.layout.dilaog_expense_entry, null, false)
         binding.dialogLoginBtn.setOnClickListener {
-            val expense = Expense(binding.dialogTitleEt.text.toString(),Util.getDate(),
-                binding.dialogAmountEt.text.toString().toDouble())
-            viewModel.insertExpenseRecord(expense)
-            alertDialog?.dismiss()
+            if(TextUtils.isEmpty(binding.dialogTitleEt.text.toString()))
+                binding.dialogTitleEt.setError("Field should not be empty")
+            if(TextUtils.isEmpty(binding.dialogAmountEt.text.toString()))
+                binding.dialogAmountEt.setError("Field should not be empty")
+            if(!TextUtils.isEmpty(binding.dialogTitleEt.text.toString()) && !TextUtils.isEmpty(binding.dialogTitleEt.text.toString())){
+                val expense = Expense(binding.dialogTitleEt.text.toString(),Util.getDate(),
+                    binding.dialogAmountEt.text.toString().toDouble())
+                viewModel.insertExpenseRecord(expense)
+                alertDialog?.dismiss()
+            }
         }
         builder.setView(binding.root)
          alertDialog =  builder.show()

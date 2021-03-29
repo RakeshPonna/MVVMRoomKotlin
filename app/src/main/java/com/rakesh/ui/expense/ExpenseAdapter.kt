@@ -2,12 +2,15 @@ package com.rakesh.ui.expense
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.databinding.BindingAdapter
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.rakesh.data.model.Expense
 import com.rakesh.mvvmroomkotlin.BR
 import com.rakesh.mvvmroomkotlin.databinding.RowExpensesBinding
 import com.rakesh.ui.base.DataBindingViewHolder
+
 
 class ExpenseAdapter(
     private var items: MutableList<Expense> = arrayListOf()
@@ -40,5 +43,12 @@ class ExpenseAdapter(
             dataBinding.setVariable(BR.dataItem, t)
         }
 
+    }
+}
+
+@BindingAdapter("amount")
+fun amountConverter(view: AppCompatTextView, value: String?) {
+    if (value != null) {
+        with(view) { setText(value.toBigDecimal().toString()) }
     }
 }
